@@ -115,15 +115,22 @@ for country in countries:
     df_all = pd.concat([df_all, ret], axis=0)
 
 # tokyo data preparation
-data_url_tokyo = 'https://stopcovid19.metro.tokyo.lg.jp/data/130001_tokyo_covid19_patients.csv'
+#data_url_tokyo = 'https://stopcovid19.metro.tokyo.lg.jp/data/130001_tokyo_covid19_patients.csv'
+data_url_tokyo = 'https://data.stopcovid19.metro.tokyo.lg.jp/130001_tokyo_covid19_patients_per_report_date.csv'
 filename_tokyo = 'tokyo.csv'
 open(filename_tokyo, 'wb').write(requests.get(data_url_tokyo).content)
 df_all_tokyo = pd.read_csv(filename_tokyo)
-df_all_tokyo = df_all_tokyo[['公表_年月日']]
-df_all_tokyo = df_all_tokyo.rename(columns={'公表_年月日': 'date'})
-df_all_tokyo = df_all_tokyo.groupby('date').size().reset_index()
-df_all_tokyo.columns = ['date', 'cases']
+
+# df_all_tokyo = df_all_tokyo[['公表_年月日']]
+# df_all_tokyo = df_all_tokyo.rename(columns={'公表_年月日': 'date'})
+# df_all_tokyo = df_all_tokyo.groupby('date').size().reset_index()
+# df_all_tokyo.columns = ['date', 'cases']
+# df_all_tokyo['date'] = pd.to_datetime(df_all_tokyo['date'])
+
+df_all_tokyo = df_all_tokyo[['公表_年月日', '日別陽性者数']]
+df_all_tokyo = df_all_tokyo.rename(columns={'公表_年月日': 'date', '日別陽性者数': 'cases'})
 df_all_tokyo['date'] = pd.to_datetime(df_all_tokyo['date'])
+
 start = df_all_tokyo['date'][0]
 end = df_all_tokyo['date'][len(df_all_tokyo['date']) - 1]
 df_tokyo = pd.DataFrame(
