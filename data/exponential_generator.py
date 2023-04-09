@@ -295,8 +295,7 @@ def _country_stat(country, events_all, params):
         params: hyperparameters for calculating statistics
     """
 
-    # グラフのメモリの表示期間を調整する
-    # interval = 62
+    interval = 31
 
     if country == "Korea, South":
         ctr = "South_Korea"
@@ -423,11 +422,11 @@ def _country_stat(country, events_all, params):
                                '0th': zeroth_alarm, '1st': first_alarm, '2nd': second_alarm})
     print(raw_alarms)
 
-    return df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, alarm_1_index, alarm_2_index, alarm_0_p, alarm_0_m, df_concat, printctr, ctr, events, output_path, ret_window, raw_alarms
+    return df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, alarm_1_index, alarm_2_index, alarm_0_p, alarm_0_m, df_concat, printctr, ctr, events, output_path, interval, ret_window, raw_alarms
 
 
 def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, alarm_1_index, alarm_2_index,
-                  alarm_0_p, alarm_0_m, df_concat, printctr, ctr, events, output_path, ret_window):
+                  alarm_0_p, alarm_0_m, df_concat, printctr, ctr, events, output_path, interval, ret_window, save_path, save_interval, x_min, x_max):
     # plot data
     # 0th D-MDL
     plt.clf()
@@ -437,7 +436,7 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
     plt.figure(figsize=(28, 10))
 
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=save_interval))
 
     # dates in datetime format and change scores
     plt.plot(df['date'], mdl_0 / np.nanmax(mdl_0))
@@ -455,11 +454,11 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
                linestyle='-', linewidth=2)
     plt.text(events, 0.8, 'Social distancing', color='black')
 
-    #plt.xlim(start - dt.timedelta(days=3), end + dt.timedelta(days=3))
+    plt.xlim(x_min, x_max)
     plt.ylim(0, 1.1)
     plt.tight_layout()
-    plt.savefig(output_path + ctr + '_0_score.png')
-    plt.savefig(output_path + ctr + '_0_score.eps')
+    plt.savefig(save_path + ctr + '_0_score.png')
+    plt.savefig(save_path + ctr + '_0_score.eps')
 
     # 1st D-MDL
     plt.clf()
@@ -469,7 +468,7 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
     plt.figure(figsize=(28, 10))
 
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=save_interval))
     # dates in datetime format and change scores
     plt.plot(df['date'], mdl_1 / np.nanmax(mdl_1))
     plt.gcf().autofmt_xdate()
@@ -486,11 +485,11 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
                linestyle='-', linewidth=2)
     plt.text(events, 0.8, 'Social distancing', color='black')
 
-    #plt.xlim(start - dt.timedelta(days=3), end + dt.timedelta(days=3))
+    plt.xlim(x_min, x_max)
     plt.ylim(0, 1.1)
     plt.tight_layout()
-    plt.savefig(output_path + ctr + '_1_score.png')
-    plt.savefig(output_path + ctr + '_1_score.eps')
+    plt.savefig(save_path + ctr + '_1_score.png')
+    plt.savefig(save_path + ctr + '_1_score.eps')
 
     # 2nd D-MDL
     plt.rc('font', size=36)
@@ -500,7 +499,7 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
     plt.figure(figsize=(28, 10))
 
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=save_interval))
     # dates in datetime format and change scores
     plt.plot(df['date'], mdl_2 / np.nanmax(mdl_2))
     plt.gcf().autofmt_xdate()
@@ -517,11 +516,11 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
                linestyle='-', linewidth=2)
     plt.text(events, 0.8, 'Social distancing', color='black')
 
-    #plt.xlim(start - dt.timedelta(days=3), end + dt.timedelta(days=3))
+    plt.xlim(x_min, x_max)
     plt.ylim(0, 1.1)
     plt.tight_layout()
-    plt.savefig(output_path + ctr + '_2_score.png')
-    plt.savefig(output_path + ctr + '_2_score.eps')
+    plt.savefig(save_path + ctr + '_2_score.png')
+    plt.savefig(save_path + ctr + '_2_score.eps')
 
     # cases
     plt.rc('font', size=36)
@@ -531,7 +530,7 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
     plt.figure(figsize=(28, 10))
 
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=save_interval))
     # dates in datetime format and change scores
     #plt.plot(df['date'], np.exp(df[ctr]))
     # df_concat_localcum["local_cumcases"][0]=1
@@ -557,11 +556,11 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
         plt.vlines(df['date'][p_index], ymin=0, ymax=max(
             np.exp(df[ctr]))**1.1, color='r', linestyle='-')
 
-    #plt.xlim(start - dt.timedelta(days=3), end + dt.timedelta(days=3))
+    plt.xlim(x_min, x_max)
     plt.ylim(0, max(np.exp(df[ctr])) ** 1.1)
     plt.tight_layout()
-    plt.savefig(output_path + ctr + '_case.png')
-    plt.savefig(output_path + ctr + '_case.eps')
+    plt.savefig(save_path + ctr + '_case.png')
+    plt.savefig(save_path + ctr + '_case.eps')
 
     # window size
     plt.rc('font', size=36)
@@ -571,7 +570,7 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
     plt.figure(figsize=(28, 10))
 
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=save_interval))
     plt.plot(df_concat['date'], df_concat['window'])
     plt.gcf().autofmt_xdate()
     plt.title(printctr)
@@ -592,11 +591,11 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
     plt.text(events, 0.8 * max(40, np.nanmax(ret_window) * 1.1),
              'Social distancing', color='black')
 
-    #plt.xlim(start - dt.timedelta(days=3), end + dt.timedelta(days=3))
+    plt.xlim(x_min, x_max)
     plt.ylim(0, max(40, np.nanmax(ret_window) * 1.1))
     plt.tight_layout()
-    plt.savefig(output_path + ctr + '_window_size.png')
-    plt.savefig(output_path + ctr + '_window_size.eps')
+    plt.savefig(save_path + ctr + '_window_size.png')
+    plt.savefig(save_path + ctr + '_window_size.eps')
 
 
 countries = ["Austria", "Belarus", "Belgium", "Brazil", "Canada", "Chile", "China", "Ecuador",
@@ -605,7 +604,7 @@ countries = ["Austria", "Belarus", "Belgium", "Brazil", "Canada", "Chile", "Chin
              "Saudi Arabia", "Singapore", "Korea, South", "Spain", "Sweden", "Switzerland", "Turkey",
              "United Arab Emirates", "Ukraine", "United Kingdom", "US", "Tokyo"]
 
-#countries = ["Japan", "Tokyo", "Belgium", "Brazil"]
+# countries = ["Japan", "Tokyo", "Belgium", "Brazil"]
 
 events_Austria = [pd.to_datetime('2020/3/16')]
 events_Belarus = [pd.to_datetime('2020/4/9')]
@@ -687,10 +686,19 @@ res = np.array(p.map(country_stat, args))
 for i in range(len(res)):
     alarms_for_each_country = pd.concat(
         [alarms_for_each_country, res[i][17]], axis=0)
+    x_max = max(res[i][0]['date'])
+    x_min = min(res[i][0]['date'])
     country_graph(res[i][0], res[i][1], res[i][2], res[i][3], res[i][4], res[i][5],
                   res[i][6], res[i][7], res[i][8], res[
                       i][9], res[i][10], res[i][11],
-                  res[i][12], res[i][13], res[i][14], res[i][15])
+                  res[i][12], res[i][13], res[i][14], res[i][15], res[i][16], config.SAVE_PATH_EXPONENTIAL_LONG_TERM, config.INTERVAL_LONG, x_min, x_max)
+    x_min = max(res[i][0]['date']) - dt.timedelta(days=365)
+    x_max = max(res[i][0]['date'])
+    country_graph(res[i][0], res[i][1], res[i][2], res[i][3], res[i][4], res[i][5],
+                  res[i][6], res[i][7], res[i][8], res[
+                      i][9], res[i][10], res[i][11],
+                  res[i][12], res[i][13], res[i][14], res[i][15], res[i][16], config.SAVE_PATH_EXPONENTIAL_SHORT_TERM, config.INTERVAL_SHORT, x_min, x_max)
+
 
 alarms_for_each_country.to_csv(
     'data/exponential_alarm_results.csv', index=False)

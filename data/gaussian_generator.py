@@ -136,7 +136,7 @@ delta_first = 0.99  # delta for 1st
 delta_second = 0.99  # delta for 2nd
 dimension = 2  # dimension of the univariate Gaussian
 font_size = 36  # figure font size
-output_path = './data/gaussian_figs/'  # output path of the figures
+output_path = './data/gaussian_figs_long/'  # output path of the figures
 # interval = 62 # グラフのメモリの表示期間を変える
 os.makedirs(output_path, exist_ok=True)
 
@@ -438,7 +438,9 @@ for country in candidates_country:
             dict_changes_cases[key] = max_mdl
         dict_changes_cases[key] = dict_changes_cases[key] / max_mdl
 
-    # Generating Images
+    # Generating Images (LONGTERM)
+    x_max = np.datetime64(max(df_date))
+    x_min = np.datetime64(min(df_date))
     plt.clf()
     plt.figure(figsize=(28, 10))
     plt.rc('font', size=font_size)
@@ -466,14 +468,15 @@ for country in candidates_country:
                    color='black', linestyle='-', linewidth=2)
         plt.text(dates_events, 0.8, 'Social distancing', color='black')
 
+    plt.xlim(x_min, x_max)
     plt.ylim(0, 1.1)
     plt.tight_layout()
     if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
-        plt.savefig(output_path + country.replace(' ', '_') + '_zero.png')
-        plt.savefig(output_path + country.replace(' ', '_') + '_zero.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_zero.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_zero.eps')
     else:
-        plt.savefig(output_path + country + '_0_score.png')
-        plt.savefig(output_path + country + '_0_score.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_0_score.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_0_score.eps')
 
     # window figure
     plt.clf()
@@ -501,14 +504,15 @@ for country in candidates_country:
     plt.rc('font', size=font_size)
     plt.rc('xtick', labelsize=font_size)
     plt.rc('ytick', labelsize=font_size)
+    plt.xlim(x_min, x_max)
     plt.ylim(0, max_window_size)
     plt.tight_layout()
     if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
-        plt.savefig(output_path + country.replace(' ', '_') + '_window.png')
-        plt.savefig(output_path + country.replace(' ', '_') + '_window.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_window.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_window.eps')
     else:
-        plt.savefig(output_path + country + '_window_size.png')
-        plt.savefig(output_path + country + '_window_size.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_window_size.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_window_size.eps')
 
     # first order figure
     max_first_mdl = 0
@@ -552,17 +556,18 @@ for country in candidates_country:
                    color='black', linestyle='-', linewidth=2)
         plt.text(dates_events, 0.8, 'Social distancing', color='black')
 
+    plt.xlim(x_min, x_max)
     plt.ylim(0, 1.1)
     plt.rc('font', size=font_size)
     plt.rc('xtick', labelsize=font_size)
     plt.rc('ytick', labelsize=font_size)
     plt.tight_layout()
     if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
-        plt.savefig(output_path + country.replace(' ', '_') + '_first.png')
-        plt.savefig(output_path + country.replace(' ', '_') + '_first.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_first.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_first.eps')
     else:
-        plt.savefig(output_path + country + '_1_score.png')
-        plt.savefig(output_path + country + '_1_score.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_1_score.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_1_score.eps')
 
     # second order figure
     max_second_mdl = 0
@@ -606,17 +611,18 @@ for country in candidates_country:
                    color='black', linestyle='-', linewidth=2)
         plt.text(dates_events, 0.8, 'Social distancing', color='black')
 
+    plt.xlim(x_min, x_max)
     plt.ylim(0, 1.1)
     plt.rc('font', size=font_size)
     plt.rc('xtick', labelsize=font_size)
     plt.rc('ytick', labelsize=font_size)
     plt.tight_layout()
     if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
-        plt.savefig(output_path + country.replace(' ', '_') + '_second.png')
-        plt.savefig(output_path + country.replace(' ', '_') + '_second.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_second.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_second.eps')
     else:
-        plt.savefig(output_path + country + '_2_score.png')
-        plt.savefig(output_path + country + '_2_score.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_2_score.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_2_score.eps')
 
     # cases figure
     plt.clf()
@@ -643,13 +649,244 @@ for country in candidates_country:
         plt.text(dates_events, np.max(case_day) * 0.8,
                  'Social distancing', color='black')
 
+    plt.xlim(x_min, x_max)
     plt.ylim(0, np.max(case_day) * 1.1)
     plt.rc('font', size=font_size)
     plt.rc('xtick', labelsize=font_size)
     plt.rc('ytick', labelsize=font_size)
     plt.tight_layout()
-    plt.savefig(output_path + country + '_case.png')
-    plt.savefig(output_path + country + '_case.eps')
+    plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_case.png')
+    plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_case.eps')
+
+    # Generating Images (SHORTTERM)
+    x_max = np.datetime64(max(df_date))
+    x_min = np.datetime64(max(df_date)-timedelta(days=365))
+    plt.clf()
+    plt.figure(figsize=(28, 10))
+    plt.rc('font', size=font_size)
+    plt.rc('xtick', labelsize=font_size)
+    plt.rc('ytick', labelsize=font_size)
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_SHORT))
+    # replace X-DATES and Y-VALUES with the variable names
+    plt.plot(dates_tmp_cases, MDL_scores_cases)
+    plt.gcf().autofmt_xdate()
+    if country == 'South_Korea':
+        plt.title('South Korea')
+    else:
+        plt.title(country)
+    plt.ylabel('0th D-MDL change score')
+
+    change_index = 1
+    for key in dict_changes_cases:
+        plt.vlines(key, ymin=0, ymax=dict_changes_cases[
+                   key], color='r', linestyle='--')
+        change_index += 1
+
+    if country in event_dict:
+        plt.vlines(dates_events, ymin=0, ymax=1.1,
+                   color='black', linestyle='-', linewidth=2)
+        plt.text(dates_events, 0.8, 'Social distancing', color='black')
+
+    plt.xlim(x_min, x_max)
+    plt.ylim(0, 1.1)
+    plt.tight_layout()
+    if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_zero.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_zero.eps')
+    else:
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_0_score.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_0_score.eps')
+
+    # window figure
+    plt.clf()
+    plt.figure(figsize=(28, 10))
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_SHORT))
+    plt.plot(dates_tmp_cases, windows_cases)
+    plt.gcf().autofmt_xdate()
+    if country == 'South_Korea':
+        plt.title('South Korea')
+    else:
+        plt.title(country)
+    plt.ylabel('Window size')
+
+    max_window_size = max(40, np.nanmax(np.array(windows_cases)) * 1.1)
+
+    for key in dic_windows_cases:
+        plt.vlines(key, ymin=2, ymax=max_window_size, color='r', linestyle='-')
+
+    if country in event_dict:
+        plt.vlines(dates_events, ymin=0, ymax=max_window_size,
+                   color='black', linestyle='-', linewidth=2)
+        plt.text(dates_events, 25.1, 'Social distancing', color='black')
+
+    plt.rc('font', size=font_size)
+    plt.rc('xtick', labelsize=font_size)
+    plt.rc('ytick', labelsize=font_size)
+    plt.xlim(x_min, x_max)
+    plt.ylim(0, max_window_size)
+    plt.tight_layout()
+    if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_window.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_window.eps')
+    else:
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_window_size.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_window_size.eps')
+
+    # first order figure
+    max_first_mdl = 0
+    for tmp_mdl in MDL_first_scores_cases:
+        if tmp_mdl > max_first_mdl and tmp_mdl != float('inf'):
+            max_first_mdl = tmp_mdl
+
+    MDL_first_scores_cases = [x if x != float(
+        'inf') else max_first_mdl for x in MDL_first_scores_cases]
+
+    #MDL_first_max = np.max(MDL_first_scores_cases)
+    MDL_first_scores_cases[:] /= max_first_mdl
+
+    for key in dict_first_changes_cases:
+        if dict_first_changes_cases[key] == float('inf'):
+            dict_first_changes_cases[key] = max_first_mdl
+        dict_first_changes_cases[
+            key] = dict_first_changes_cases[key] / max_first_mdl
+
+    plt.clf()
+    plt.figure(figsize=(28, 10))
+
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_SHORT))
+    plt.plot(dates_tmp_cases_first, MDL_first_scores_cases)
+    plt.gcf().autofmt_xdate()
+    if country == 'South_Korea':
+        plt.title('South Korea')
+    else:
+        plt.title(country)
+    plt.ylabel('1st D-MDL change score')
+
+    change_index = 1
+    for key in dict_first_changes_cases:
+        plt.vlines(key, ymin=0, ymax=dict_first_changes_cases[
+                   key], color='r', linestyle='--')
+        change_index += 1
+
+    if country in event_dict:
+        plt.vlines(dates_events, ymin=0, ymax=1.1,
+                   color='black', linestyle='-', linewidth=2)
+        plt.text(dates_events, 0.8, 'Social distancing', color='black')
+
+    plt.xlim(x_min, x_max)
+    plt.ylim(0, 1.1)
+    plt.rc('font', size=font_size)
+    plt.rc('xtick', labelsize=font_size)
+    plt.rc('ytick', labelsize=font_size)
+    plt.tight_layout()
+    if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_first.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_first.eps')
+    else:
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_1_score.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_1_score.eps')
+
+    # second order figure
+    max_second_mdl = 0
+    for tmp_mdl in MDL_second_scores_cases:
+        if tmp_mdl > max_second_mdl and tmp_mdl != float('inf'):
+            max_second_mdl = tmp_mdl
+
+    MDL_second_scores_cases = [x if x != float(
+        'inf') else max_second_mdl for x in MDL_second_scores_cases]
+
+    #MDL_first_max = np.max(MDL_first_scores_cases)
+    MDL_second_scores_cases[:] /= max_second_mdl
+
+    for key in dict_second_changes_cases:
+        if dict_second_changes_cases[key] == float('inf'):
+            dict_second_changes_cases[key] = max_second_mdl
+        dict_second_changes_cases[
+            key] = dict_second_changes_cases[key] / max_second_mdl
+
+    plt.clf()
+    plt.figure(figsize=(28, 10))
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_SHORT))
+    plt.plot(dates_tmp_cases_second, MDL_second_scores_cases)
+    plt.gcf().autofmt_xdate()
+    if country == 'South_Korea':
+        plt.title('South Korea')
+    else:
+        plt.title(country)
+    plt.ylabel('2nd D-MDL change score')
+
+    change_index = 1
+    for key in dict_second_changes_cases:
+        plt.vlines(key, ymin=0, ymax=dict_second_changes_cases[
+                   key], color='r', linestyle='--')
+        #plt.text(key, dict_second_changes_cases[key]+0.025, str(change_index), color='black', bbox=box)
+        change_index += 1
+
+    if country in event_dict:
+        plt.vlines(dates_events, ymin=0, ymax=1.1,
+                   color='black', linestyle='-', linewidth=2)
+        plt.text(dates_events, 0.8, 'Social distancing', color='black')
+
+    plt.xlim(x_min, x_max)
+    plt.ylim(0, 1.1)
+    plt.rc('font', size=font_size)
+    plt.rc('xtick', labelsize=font_size)
+    plt.rc('ytick', labelsize=font_size)
+    plt.tight_layout()
+    if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_second.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_second.eps')
+    else:
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_2_score.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_2_score.eps')
+
+    # cases figure
+    plt.clf()
+    plt.figure(figsize=(28, 10))
+    case_day = []
+    days = []
+    for key in case_values:
+        case_day.append(case_values[key])
+        days.append(key)
+
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_SHORT))
+    plt.plot(days, case_day)
+    plt.gcf().autofmt_xdate()
+    plt.ylabel('Cases')
+    if country == 'South_Korea':
+        plt.title('South Korea')
+    else:
+        plt.title(country)
+
+    if country in event_dict:
+        plt.vlines(dates_events, ymin=0, ymax=np.max(case_day) *
+                   1.1, color='black', linestyle='-', linewidth=2)
+        plt.text(dates_events, np.max(case_day) * 0.8,
+                 'Social distancing', color='black')
+
+    plt.xlim(x_min, x_max)
+    plt.ylim(0, np.max(case_day) * 1.1)
+    plt.rc('font', size=font_size)
+    plt.rc('xtick', labelsize=font_size)
+    plt.rc('ytick', labelsize=font_size)
+    plt.tight_layout()
+    plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_case.png')
+    plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_case.eps')
+
+
+
+
+    # x_max = np.datetime64(max(df_date))
+    # x_min = np.datetime64(min(df_date))
+    # generate_image(x_min, x_max, config.INTERVAL_LONG, config.SAVE_PATH_GAUSSIAN_LONG_TERM)
+    # x_max = np.datetime64(max(df_date))
+    # x_min = x_max-timedelta(days=365)
+    # generate_image(x_min, x_max, config.INTERVAL_SHORT, config.SAVE_PATH_GAUSSIAN_SHORT_TERM)
 
     # log for posts to slack
     if np.datetime64(max_df_date) in dict_changes_cases:

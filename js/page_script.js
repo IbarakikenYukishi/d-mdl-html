@@ -45,7 +45,7 @@ function createArray(csvData, country) {
   console.log(csvArray);
 };
 
-function switchPage(page) {
+function switchPage(page, term) {
 
   var element = document.getElementById("main");
   if (page == 'index') {
@@ -84,39 +84,40 @@ function switchPage(page) {
     element.innerHTML = element_str;
   } else {
     var country_name = page.replace('_', ' ');
-    var element_str = '<h2>Results of Gaussian Modeling(' + country_name + ')</h2> \
+    var element_str = '<button class="c-button" onclick="switchPage(\'' + page +'\', \'short\')">Show current one year, </button> or <button class="c-button" onclick="switchPage(\'' + page +'\', \'long\')">Show the entire period.</button> \
+                    <h2>Results of Gaussian Modeling(' + country_name + ')</h2>  \
                     <p id="previewCSVFile"></p> \
                     <h3>Daily Confirmed Cases</h3>\
                     <br clear="all"> \
-                    <img src="./data/gaussian_figs/' + page + '_case.png" width="700">\
+                    <img src="./data/gaussian_figs_'+term+'/' + page + '_case.png" width="700">\
                     <h3>Window Size</h3>\
                     <br clear="all">\
-                    <img src="./data/gaussian_figs/' + page + '_window_size.png" width="700">\
+                    <img src="./data/gaussian_figs_'+term+'/' + page + '_window_size.png" width="700">\
                     <h3>0th Order D-MDL Score</h3>\
                     <br clear="all">\
-                    <img src="./data/gaussian_figs/' + page + '_0_score.png" width="700">\
+                    <img src="./data/gaussian_figs_'+term+'/' + page + '_0_score.png" width="700">\
                     <h3>1st Order D-MDL Score</h3>\
                     <br clear="all">\
-                    <img src="./data/gaussian_figs/' + page + '_1_score.png" width="700">\
+                    <img src="./data/gaussian_figs_'+term+'/' + page + '_1_score.png" width="700">\
                     <h3>2nd Order D-MDL Score</h3>\
                     <br clear="all">\
-                    <img src="./data/gaussian_figs/' + page + '_2_score.png" width="700">\
+                    <img src="./data/gaussian_figs_'+term+'/' + page + '_2_score.png" width="700">\
                 <h2>Results of Exponential Modeling(' + country_name + ')</h2>\
                     <h3>Cumulative Confirmed Cases</h3>\
                     <br clear="all">\
-                    <img src="./data/exponential_figs/' + page + '_case.png" width="700">\
+                    <img src="./data/exponential_figs_'+term+'/' + page + '_case.png" width="700">\
                     <h3>Window Size</h3>\
                     <br clear="all">\
-                    <img src="./data/exponential_figs/' + page + '_window_size.png" width="700">\
+                    <img src="./data/exponential_figs_'+term+'/' + page + '_window_size.png" width="700">\
                     <h3>0th Order D-MDL Score</h3>\
                     <br clear="all">\
-                    <img src="./data/exponential_figs/' + page + '_0_score.png" width="700">\
+                    <img src="./data/exponential_figs_'+term+'/' + page + '_0_score.png" width="700">\
                     <h3>1st Order D-MDL Score</h3>\
                     <br clear="all">\
-                    <img src="./data/exponential_figs/' + page + '_1_score.png" width="700">\
+                    <img src="./data/exponential_figs_'+term+'/' + page + '_1_score.png" width="700">\
                     <h3>2nd Order D-MDL Score</h3>\
                     <br clear="all">\
-                    <img src="./data/exponential_figs/' + page + '_2_score.png" width="700">';
+                    <img src="./data/exponential_figs_'+term+'/' + page + '_2_score.png" width="700">';
     element.innerHTML = element_str;
     getCSVFile(page);
   };

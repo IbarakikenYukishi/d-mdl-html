@@ -41,12 +41,14 @@ jobs:
     - name: Generate and add Gaussian figures
       run: |
         python ./data/gaussian_generator.py
-        git add ./data/gaussian_figs/
+        git add ./data/gaussian_figs_short/
+        git add ./data/gaussian_figs_long/
         git add ./data/gaussian_alarm_results.csv
     - name: Generate and add exponential figures
       run: |
         python ./data//exponential_generator.py
-        git add ./data/exponential_figs/
+        git add ./data/exponential_figs_short/
+        git add ./data/exponential_figs_long/
         git add ./data/exponential_alarm_results.csv
     - name: Post to slack
       run:

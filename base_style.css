@@ -21,6 +21,25 @@ ul{
     margin-inline-end: 0px;
     padding-inline-start: 0px;
 }
+.c-button {
+  min-width: 100px;
+  font-family: inherit;
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #4676d7;
+  color: #fff;
+  padding: 2px 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.c-button:hover {
+  background: #1d49aa;
+}
+.c-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px #cbd6ee;
+}
 .localnavi li {
 	cursor: pointer;
     padding: 0;
