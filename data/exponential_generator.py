@@ -14,6 +14,7 @@ import requests
 import multiprocessing as multi
 from multiprocessing import Pool
 import scipy.linalg as sl
+import config
 
 # data source
 #data_url = 'https://opendata.ecdc.europa.eu/covid19/casedistribution/csv'
@@ -294,7 +295,8 @@ def _country_stat(country, events_all, params):
         params: hyperparameters for calculating statistics
     """
 
-    interval = 31
+    # グラフのメモリの表示期間を調整する
+    # interval = 62
 
     if country == "Korea, South":
         ctr = "South_Korea"
@@ -421,11 +423,11 @@ def _country_stat(country, events_all, params):
                                '0th': zeroth_alarm, '1st': first_alarm, '2nd': second_alarm})
     print(raw_alarms)
 
-    return df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, alarm_1_index, alarm_2_index, alarm_0_p, alarm_0_m, df_concat, printctr, ctr, events, output_path, interval, ret_window, raw_alarms
+    return df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, alarm_1_index, alarm_2_index, alarm_0_p, alarm_0_m, df_concat, printctr, ctr, events, output_path, ret_window, raw_alarms
 
 
 def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, alarm_1_index, alarm_2_index,
-                  alarm_0_p, alarm_0_m, df_concat, printctr, ctr, events, output_path, interval, ret_window):
+                  alarm_0_p, alarm_0_m, df_concat, printctr, ctr, events, output_path, ret_window):
     # plot data
     # 0th D-MDL
     plt.clf()
@@ -435,7 +437,7 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
     plt.figure(figsize=(28, 10))
 
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=interval))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
 
     # dates in datetime format and change scores
     plt.plot(df['date'], mdl_0 / np.nanmax(mdl_0))
@@ -467,7 +469,7 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
     plt.figure(figsize=(28, 10))
 
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=interval))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
     # dates in datetime format and change scores
     plt.plot(df['date'], mdl_1 / np.nanmax(mdl_1))
     plt.gcf().autofmt_xdate()
@@ -498,7 +500,7 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
     plt.figure(figsize=(28, 10))
 
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=interval))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
     # dates in datetime format and change scores
     plt.plot(df['date'], mdl_2 / np.nanmax(mdl_2))
     plt.gcf().autofmt_xdate()
@@ -529,7 +531,7 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
     plt.figure(figsize=(28, 10))
 
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=interval))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
     # dates in datetime format and change scores
     #plt.plot(df['date'], np.exp(df[ctr]))
     # df_concat_localcum["local_cumcases"][0]=1
@@ -569,7 +571,7 @@ def country_graph(df, df_concat_localcum, mdl_0, mdl_1, mdl_2, alarm_0_index, al
     plt.figure(figsize=(28, 10))
 
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=interval))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
     plt.plot(df_concat['date'], df_concat['window'])
     plt.gcf().autofmt_xdate()
     plt.title(printctr)
@@ -688,7 +690,7 @@ for i in range(len(res)):
     country_graph(res[i][0], res[i][1], res[i][2], res[i][3], res[i][4], res[i][5],
                   res[i][6], res[i][7], res[i][8], res[
                       i][9], res[i][10], res[i][11],
-                  res[i][12], res[i][13], res[i][14], res[i][15], res[i][16])
+                  res[i][12], res[i][13], res[i][14], res[i][15])
 
 alarms_for_each_country.to_csv(
     'data/exponential_alarm_results.csv', index=False)

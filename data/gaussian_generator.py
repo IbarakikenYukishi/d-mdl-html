@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 from functions import *
+import config
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib.cbook as cbook
@@ -136,7 +137,7 @@ delta_second = 0.99  # delta for 2nd
 dimension = 2  # dimension of the univariate Gaussian
 font_size = 36  # figure font size
 output_path = './data/gaussian_figs/'  # output path of the figures
-interval = 31
+# interval = 62 # グラフのメモリの表示期間を変える
 os.makedirs(output_path, exist_ok=True)
 
 alarms_for_each_country = pd.DataFrame()
@@ -437,13 +438,14 @@ for country in candidates_country:
             dict_changes_cases[key] = max_mdl
         dict_changes_cases[key] = dict_changes_cases[key] / max_mdl
 
+    # Generating Images
     plt.clf()
     plt.figure(figsize=(28, 10))
     plt.rc('font', size=font_size)
     plt.rc('xtick', labelsize=font_size)
     plt.rc('ytick', labelsize=font_size)
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=interval))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
     # replace X-DATES and Y-VALUES with the variable names
     plt.plot(dates_tmp_cases, MDL_scores_cases)
     plt.gcf().autofmt_xdate()
@@ -477,7 +479,7 @@ for country in candidates_country:
     plt.clf()
     plt.figure(figsize=(28, 10))
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=interval))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
     plt.plot(dates_tmp_cases, windows_cases)
     plt.gcf().autofmt_xdate()
     if country == 'South_Korea':
@@ -530,7 +532,7 @@ for country in candidates_country:
     plt.figure(figsize=(28, 10))
 
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=interval))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
     plt.plot(dates_tmp_cases_first, MDL_first_scores_cases)
     plt.gcf().autofmt_xdate()
     if country == 'South_Korea':
@@ -583,7 +585,7 @@ for country in candidates_country:
     plt.clf()
     plt.figure(figsize=(28, 10))
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=interval))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
     plt.plot(dates_tmp_cases_second, MDL_second_scores_cases)
     plt.gcf().autofmt_xdate()
     if country == 'South_Korea':
@@ -626,7 +628,7 @@ for country in candidates_country:
         days.append(key)
 
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=interval))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=config.INTERVAL_LONG))
     plt.plot(days, case_day)
     plt.gcf().autofmt_xdate()
     plt.ylabel('Cases')
