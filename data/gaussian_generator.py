@@ -472,11 +472,15 @@ for country in candidates_country:
     plt.ylim(0, 1.1)
     plt.tight_layout()
     if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_zero.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_zero.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country.replace(' ', '_') + '_zero.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country.replace(' ', '_') + '_zero.eps')
     else:
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_0_score.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_0_score.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country + '_0_score.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country + '_0_score.eps')
 
     # window figure
     plt.clf()
@@ -508,11 +512,15 @@ for country in candidates_country:
     plt.ylim(0, max_window_size)
     plt.tight_layout()
     if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_window.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_window.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country.replace(' ', '_') + '_window.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country.replace(' ', '_') + '_window.eps')
     else:
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_window_size.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_window_size.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country + '_window_size.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country + '_window_size.eps')
 
     # first order figure
     max_first_mdl = 0
@@ -563,11 +571,15 @@ for country in candidates_country:
     plt.rc('ytick', labelsize=font_size)
     plt.tight_layout()
     if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_first.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_first.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country.replace(' ', '_') + '_first.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country.replace(' ', '_') + '_first.eps')
     else:
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_1_score.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_1_score.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country + '_1_score.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country + '_1_score.eps')
 
     # second order figure
     max_second_mdl = 0
@@ -618,11 +630,15 @@ for country in candidates_country:
     plt.rc('ytick', labelsize=font_size)
     plt.tight_layout()
     if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_second.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country.replace(' ', '_') + '_second.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country.replace(' ', '_') + '_second.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country.replace(' ', '_') + '_second.eps')
     else:
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_2_score.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM + country + '_2_score.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country + '_2_score.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_LONG_TERM +
+                    country + '_2_score.eps')
 
     # cases figure
     plt.clf()
@@ -660,7 +676,7 @@ for country in candidates_country:
 
     # Generating Images (SHORTTERM)
     x_max = np.datetime64(max(df_date))
-    x_min = np.datetime64(max(df_date)-timedelta(days=365))
+    x_min = np.datetime64(max(df_date) - timedelta(days=365))
     plt.clf()
     plt.figure(figsize=(28, 10))
     plt.rc('font', size=font_size)
@@ -692,11 +708,15 @@ for country in candidates_country:
     plt.ylim(0, 1.1)
     plt.tight_layout()
     if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_zero.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_zero.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country.replace(' ', '_') + '_zero.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country.replace(' ', '_') + '_zero.eps')
     else:
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_0_score.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_0_score.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country + '_0_score.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country + '_0_score.eps')
 
     # window figure
     plt.clf()
@@ -728,11 +748,15 @@ for country in candidates_country:
     plt.ylim(0, max_window_size)
     plt.tight_layout()
     if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_window.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_window.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country.replace(' ', '_') + '_window.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country.replace(' ', '_') + '_window.eps')
     else:
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_window_size.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_window_size.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country + '_window_size.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country + '_window_size.eps')
 
     # first order figure
     max_first_mdl = 0
@@ -783,11 +807,15 @@ for country in candidates_country:
     plt.rc('ytick', labelsize=font_size)
     plt.tight_layout()
     if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_first.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_first.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country.replace(' ', '_') + '_first.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country.replace(' ', '_') + '_first.eps')
     else:
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_1_score.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_1_score.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country + '_1_score.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country + '_1_score.eps')
 
     # second order figure
     max_second_mdl = 0
@@ -838,11 +866,15 @@ for country in candidates_country:
     plt.rc('ytick', labelsize=font_size)
     plt.tight_layout()
     if country == 'South Korea' or country == 'United Kingdom' or country == 'United States':
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_second.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country.replace(' ', '_') + '_second.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country.replace(' ', '_') + '_second.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country.replace(' ', '_') + '_second.eps')
     else:
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_2_score.png')
-        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_2_score.eps')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country + '_2_score.png')
+        plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM +
+                    country + '_2_score.eps')
 
     # cases figure
     plt.clf()
@@ -877,9 +909,6 @@ for country in candidates_country:
     plt.tight_layout()
     plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_case.png')
     plt.savefig(config.SAVE_PATH_GAUSSIAN_SHORT_TERM + country + '_case.eps')
-
-
-
 
     # x_max = np.datetime64(max(df_date))
     # x_min = np.datetime64(min(df_date))
@@ -959,11 +988,15 @@ for country in candidates_country:
         sign_latest_date = None
         sign_oldest_date = None
     elif first_latest_alarm_date is None:
-        sign_latest_date = pd.to_datetime(second_latest_alarm_date, format='%Y-%m-%d')
-        sign_oldest_date = pd.to_datetime(second_latest_alarm_date, format='%Y-%m-%d')
+        sign_latest_date = pd.to_datetime(
+            second_latest_alarm_date, format='%Y-%m-%d')
+        sign_oldest_date = pd.to_datetime(
+            second_latest_alarm_date, format='%Y-%m-%d')
     elif second_latest_alarm_date is None:
-        sign_latest_date = pd.to_datetime(first_latest_alarm_date, format='%Y-%m-%d')
-        sign_oldest_date = pd.to_datetime(first_latest_alarm_date, format='%Y-%m-%d')
+        sign_latest_date = pd.to_datetime(
+            first_latest_alarm_date, format='%Y-%m-%d')
+        sign_oldest_date = pd.to_datetime(
+            first_latest_alarm_date, format='%Y-%m-%d')
     else:
         sign_latest_date = pd.to_datetime(max(
             first_latest_alarm_date, second_latest_alarm_date), format='%Y-%m-%d')
@@ -993,9 +1026,9 @@ for country in candidates_country:
     alarms_for_each_country = pd.concat(
         [alarms_for_each_country, row_alarms], axis=0)
 
-alarms_for_each_country['sign_latest_date']=pd.to_datetime(
+alarms_for_each_country['sign_latest_date'] = pd.to_datetime(
     alarms_for_each_country['sign_latest_date'], format='%Y-%m-%d')
-alarms_for_each_country['predicted_window_shrink_date']=pd.to_datetime(
+alarms_for_each_country['predicted_window_shrink_date'] = pd.to_datetime(
     alarms_for_each_country['predicted_window_shrink_date'], format='%Y-%m-%d')
 alarms_for_each_country.to_csv('data/gaussian_alarm_results.csv', index=False)
 
